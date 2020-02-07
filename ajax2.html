@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>fetchb data   from external file  json format </title>
+</head>
+<body>
+    <button id="button1"> get User </button>
+    <button id="button2"> get users </button>
+    <h1>user</h1>
+    <div id="user"></div>
+    <h1>users</h1>
+    <div id="users"></div>
+
+    <script>
+        document.getElementById('button1').addEventListener('click', displayuser)
+        document.getElementById('button2').addEventListener('click', displayusers)
+        
+          function  displayuser()
+          {
+            var xmlh= new XMLHttpRequest()
+            xmlh.open('GET','user.json',true);
+            xmlh.onload=function ()
+            {
+                if(this.status == 200)
+                {//request status ok
+                 var data1 = JSON.parse(this.responseText)
+
+                 var output = " "
+                 output += '<ul>'+
+                 '<li> name:'+data1.name +'</li>' +
+                 '<li> id: '+data1.id +'</li>' +
+                 '<li> gender :'+data1.gender+'</li>' +
+                 '</ul>';
+                 document.getElementById('user').innerHTML= output
+                 console.log(data1.name);
+            // document.getElementById('user').innerHTML=this.responseText; 
+            }}
+            xmlh.send();
+        }
+
+        function  displayusers()
+          {
+            var xmlh= new XMLHttpRequest()
+            xmlh.open('GET','users.json',true);
+            xmlh.onload=function ()
+            {
+                if(this.status == 200)
+                {//request status ok
+                 var data = JSON.parse(this.responseText)
+
+                 var output1 = " "
+                 for (var i in data) // array of json 
+                 {
+                 output1 += '<ul>'+
+                 '<li> name:'+data[i].name +'</li>' +
+                 '<li> id: '+data[i].id +'</li>' +
+                 '<li> gender :'+data[i].gender+'</li>' +
+                 '</ul>';
+                 }
+                 document.getElementById('users').innerHTML= output1;
+                 console.log(data1.name);
+            // document.getElementById('user').innerHTML=this.responseText; 
+            }}
+            xmlh.send();
+        }
+    </script>
+
+</body>
+</html>
