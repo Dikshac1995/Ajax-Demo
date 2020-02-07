@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>fetch imag with json </title>
+</head>
+<body>
+    <button id="button">show image </button>
+    <dic id="users"></dic>
+    <script>
+    document.getElementById('button').addEventListener('click',loadImage);
+
+    function loadImage(){
+        var xhm = new XMLHttpRequest()
+        xhm.open('Get','https://jsonplaceholder.typicode.com/photos',true)
+        xhm.onload = function()
+        {
+        if(this.status == 200)
+                {//request status ok
+            
+                 var data = JSON.parse(this.responseText)
+                 console.table(data);
+
+                 var output1 = " "
+                 for (var i in data) // array of json 
+                 {
+                 output1 += '<ul>'+
+                 '<li> id:'+data[i].id +'</li>' +
+
+                 '<li> title: '+data[i].title +'</li>' +
+                 '<img src='+data[i].thumbnailUrl+'>'+
+                 '</ul>';
+                 }
+                 document.getElementById('users').innerHTML= output1;
+                //  console.log(data1.name);
+            // document.getElementById('user').innerHTML=this.responseText; 
+            }}
+            xhm.send();
+
+    }
+    
+    
+    </script>
+</body>
+</html>
