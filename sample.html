@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id = "clickon">clicke me</button>
+    <div id="text"></div>
+    <script>
+         
+         document.getElementById('click').addEventListener('click',loadtext);
+
+         function loadtext()
+         {
+            var xhr = new XMLHttpRequest();
+            console.log(xhr);
+            xhr.open('GET','data.text',true)// oprn - type,url/file , sync/async
+
+            xhr.onload = function(){
+                if(this.status == 200)//request status ok
+                 console.log(this.responseText);
+                 document.getElementById('text').innerHTML=this.responseText;
+            }
+            xhr.send();
+
+            
+            // xhr.onreadystatechange=function(){
+            //     if(this.readyState==4 && this.status == 200)
+            //       console.log(this.responseText)
+            
+            // }
+          
+         }
+    </script> 
+</body>
+
+
+</html>
